@@ -16,9 +16,13 @@
 
 body{
 
+    height:100vh;
     overflow:hidden;
 
-    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
 
     background:#000;
 
@@ -32,34 +36,32 @@ body{
 .bg{
 
     position:fixed;
-
     inset:0;
 
     background:
     url("./IMG-20260518-WA0012.jpg")
     center center/cover no-repeat;
 
-    opacity:.16;
-
     filter:
     blur(4px)
-    brightness(.5);
+    brightness(.45);
 
-    transform:scale(1.15);
+    transform:scale(1.1);
+
+    opacity:.25;
 
     z-index:-10;
 }
 
-/* OSCURECER */
-
 .overlay{
 
     position:fixed;
-
     inset:0;
 
     background:
-    rgba(0,0,0,.45);
+    radial-gradient(circle at center,
+    rgba(0,0,0,.15),
+    rgba(0,0,0,.7));
 
     z-index:-9;
 }
@@ -70,21 +72,21 @@ body{
 
     position:absolute;
 
-    width:500px;
-    height:500px;
+    width:450px;
+    height:450px;
 
     border-radius:50%;
 
     filter:blur(120px);
 
-    opacity:.45;
+    opacity:.4;
 
     animation:move 8s infinite alternate ease-in-out;
 }
 
 .light1{
 
-    background:#00e5ff;
+    background:#00d9ff;
 
     top:-120px;
     left:-120px;
@@ -92,7 +94,7 @@ body{
 
 .light2{
 
-    background:#ff00e6;
+    background:#ff00d4;
 
     bottom:-120px;
     right:-120px;
@@ -114,32 +116,28 @@ body{
 
 .text{
 
-    position:absolute;
-
-    top:10px;
-
     width:100%;
 
     text-align:center;
 
     color:white;
 
-    z-index:200;
+    padding:15px;
 
-    padding:0 14px;
-
-    text-shadow:
-    0 0 10px rgba(255,255,255,.5),
-    0 0 20px rgba(0,255,255,.2);
+    z-index:20;
 }
 
 .text h1{
 
     font-size:28px;
 
-    letter-spacing:4px;
-
     margin-bottom:8px;
+
+    letter-spacing:3px;
+
+    text-shadow:
+    0 0 10px #fff,
+    0 0 20px #00e5ff;
 }
 
 .small{
@@ -161,7 +159,7 @@ body{
 
     margin:auto;
 
-    padding:18px;
+    padding:16px;
 
     border-radius:24px;
 
@@ -171,53 +169,25 @@ body{
     backdrop-filter:blur(14px);
 
     border:
-    1px solid rgba(255,255,255,.15);
+    1px solid rgba(255,255,255,.12);
 
     color:white;
 
     font-size:13px;
 
-    line-height:1.8;
+    line-height:1.7;
 
     box-shadow:
     0 0 25px rgba(255,255,255,.05);
-
-    animation:fadeIn 2s ease;
-}
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0px);
-
-    }
-
 }
 
 /* ESCENA */
 
 .scene{
 
-    position:absolute;
+    flex:1;
 
-    bottom:60px;
-
-    width:100vw;
-
-    height:50vh;
+    width:100%;
 
     display:flex;
 
@@ -225,23 +195,37 @@ body{
 
     align-items:center;
 
-    transform-style:preserve-3d;
+    padding-bottom:60px;
+
+    position:relative;
 }
 
-/* ESFERA */
+/* CONTENEDOR 3D */
 
-.globe{
+.globe-wrap{
+
+    position:relative;
 
     width:320px;
     height:320px;
 
+    transform-style:preserve-3d;
+}
+
+/* ESFERA REAL */
+
+.globe{
+
+    width:100%;
+    height:100%;
+
     border-radius:50%;
 
-    position:relative;
-
-    overflow:hidden;
+    position:absolute;
 
     transform-style:preserve-3d;
+
+    overflow:hidden;
 
     touch-action:none;
 
@@ -250,59 +234,113 @@ body{
     background:
     radial-gradient(circle at 30% 20%,
     rgba(255,255,255,.95),
-    rgba(255,255,255,.12) 28%,
-    rgba(0,40,90,.97) 100%);
+    rgba(255,255,255,.18) 22%,
+    rgba(70,180,255,.15) 40%,
+    rgba(0,25,55,.96) 100%);
 
-    border:8px solid rgba(255,255,255,.22);
+    border:
+    8px solid rgba(255,255,255,.2);
 
     box-shadow:
-    inset 0 0 45px rgba(255,255,255,.35),
-    0 0 60px rgba(0,255,255,.2),
-    0 0 160px rgba(0,170,255,.25);
+    inset -20px -30px 50px rgba(0,0,0,.45),
+    inset 20px 20px 40px rgba(255,255,255,.15),
+    0 0 60px rgba(0,255,255,.15),
+    0 0 140px rgba(0,180,255,.15);
 
-    animation:float 4s ease-in-out infinite;
+    animation:
+    floating 5s ease-in-out infinite;
 }
 
-/* flotando */
+/* PROFUNDIDAD */
 
-@keyframes float{
+.globe::before{
 
-    0%,100%{
+    content:"";
 
-        translate:0 0;
-    }
+    position:absolute;
 
-    50%{
+    inset:0;
 
-        translate:0 -12px;
-    }
+    border-radius:50%;
 
+    background:
+    radial-gradient(circle at 70% 75%,
+    rgba(0,0,0,.45),
+    transparent 40%);
+
+    z-index:2;
 }
 
-/* REFLEJO */
+/* BRILLO */
 
-.reflection{
+.globe::after{
+
+    content:"";
 
     position:absolute;
 
     width:120px;
-    height:240px;
+    height:220px;
 
     border-radius:50%;
 
     background:
     linear-gradient(
     to bottom,
-    rgba(255,255,255,.65),
+    rgba(255,255,255,.7),
     transparent);
 
-    top:15px;
-    left:30px;
+    top:18px;
+    left:25px;
 
-    transform:
-    rotate(-18deg);
+    transform:rotate(-18deg);
 
-    z-index:30;
+    z-index:20;
+}
+
+@keyframes floating{
+
+    0%,100%{
+        transform:
+        translateY(0px);
+    }
+
+    50%{
+        transform:
+        translateY(-12px);
+    }
+
+}
+
+/* FOTO */
+
+.photo-container{
+
+    position:absolute;
+
+    left:50%;
+    top:48%;
+
+    transform-style:preserve-3d;
+
+    z-index:5;
+}
+
+.photo{
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+    6px solid rgba(255,255,255,.85);
+
+    box-shadow:
+    0 0 35px rgba(255,255,255,.35),
+    0 0 80px rgba(255,0,180,.25);
 }
 
 /* JARDIN */
@@ -311,22 +349,22 @@ body{
 
     position:absolute;
 
+    bottom:0;
+
     width:100%;
     height:120px;
 
-    bottom:0;
+    border-radius:50% 50% 0 0;
 
     background:
     linear-gradient(to top,
-    #0c5f14,
-    #35d235);
-
-    border-radius:50% 50% 0 0;
+    #0d5f17,
+    #37d837);
 
     overflow:hidden;
-}
 
-/* PASTO */
+    z-index:4;
+}
 
 .grass{
 
@@ -335,13 +373,13 @@ body{
     bottom:0;
 
     width:100%;
-    height:40px;
+    height:38px;
 
     background:
     repeating-linear-gradient(
     90deg,
-    #2ed82e 0px,
-    #2ed82e 4px,
+    #28d628 0px,
+    #28d628 4px,
     #176817 5px,
     #176817 8px
     );
@@ -387,36 +425,6 @@ body{
     color:#ff66ff;
 }
 
-/* FOTO */
-
-.photo-container{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform-style:preserve-3d;
-
-    z-index:10;
-}
-
-.photo{
-
-    width:165px;
-    height:165px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:7px solid rgba(255,255,255,.8);
-
-    box-shadow:
-    0 0 40px rgba(255,255,255,.4),
-    0 0 80px rgba(255,0,200,.25);
-}
-
 /* CORAZONES */
 
 .heart{
@@ -427,18 +435,16 @@ body{
 
     font-size:18px;
 
-    animation:heartFloat linear infinite;
-
     opacity:.85;
 
-    z-index:5;
+    animation:floatHeart linear forwards;
 
     text-shadow:
     0 0 10px #ff4da6,
     0 0 20px #ff4da6;
 }
 
-@keyframes heartFloat{
+@keyframes floatHeart{
 
     from{
 
@@ -464,36 +470,35 @@ body{
 
 }
 
-/* ESTRELLAS */
+/* NIEVE */
 
-.star{
+.snow{
 
     position:absolute;
-
-    width:4px;
-    height:4px;
 
     background:white;
 
     border-radius:50%;
 
-    box-shadow:
-    0 0 10px white,
-    0 0 20px cyan;
-
-    animation:twinkle 2s infinite alternate;
+    animation:fall linear forwards;
 }
 
-@keyframes twinkle{
+@keyframes fall{
 
     from{
-        opacity:.2;
-        transform:scale(.5);
+
+        transform:
+        translateY(-20px);
+
+        opacity:1;
     }
 
     to{
-        opacity:1;
-        transform:scale(1.4);
+
+        transform:
+        translateY(420px);
+
+        opacity:0;
     }
 
 }
@@ -507,19 +512,19 @@ body{
     width:220px;
     height:85px;
 
-    bottom:-52px;
+    bottom:-50px;
 
     left:50%;
 
     transform:
     translateX(-50%);
 
+    border-radius:25px;
+
     background:
     linear-gradient(to bottom,
-    #77441b,
-    #2c1306);
-
-    border-radius:28px;
+    #7a471e,
+    #2d1407);
 
     box-shadow:
     inset 0 6px 10px rgba(255,255,255,.2),
@@ -548,41 +553,30 @@ body{
 
     text-shadow:
     0 0 10px #ff00ff,
-    0 0 20px #00ffff,
-    0 0 30px #ff00ff;
+    0 0 20px #00ffff;
 }
 
-/* NIEVE */
+/* RESPONSIVE */
 
-.snow{
+@media(max-height:760px){
 
-    position:absolute;
+    .love-letter{
 
-    background:white;
+        font-size:12px;
 
-    border-radius:50%;
-
-    pointer-events:none;
-
-    animation:fall linear forwards;
-}
-
-@keyframes fall{
-
-    from{
-
-        transform:
-        translateY(-20px);
-
-        opacity:1;
+        line-height:1.6;
     }
 
-    to{
+    .globe-wrap{
 
-        transform:
-        translateY(500px);
+        width:280px;
+        height:280px;
+    }
 
-        opacity:0;
+    .photo{
+
+        width:145px;
+        height:145px;
     }
 
 }
@@ -593,7 +587,6 @@ body{
 <body>
 
 <div class="bg"></div>
-
 <div class="overlay"></div>
 
 <div class="light light1"></div>
@@ -632,51 +625,44 @@ body{
 
 <div class="scene">
 
-    <div
-    class="globe"
-    id="globe">
-
-        <div class="reflection"></div>
-
-        <!-- FOTO -->
+    <div class="globe-wrap">
 
         <div
-        class="photo-container"
-        id="photoContainer">
+        class="globe"
+        id="globe">
 
-            <img
-            src="./IMG-20260512-WA0005.jpg"
-            class="photo">
+            <!-- FOTO -->
+
+            <div
+            class="photo-container"
+            id="photoContainer">
+
+                <img
+                src="./IMG-20260512-WA0005.jpg"
+                class="photo">
+
+            </div>
+
+            <!-- JARDIN -->
+
+            <div class="garden">
+
+                <div class="grass"></div>
+
+                <div class="flower f1"></div>
+                <div class="flower f2"></div>
+                <div class="flower f3"></div>
+                <div class="flower f4"></div>
+
+            </div>
 
         </div>
 
-        <!-- estrellas -->
-
-        <div class="star" style="top:60px;left:80px;"></div>
-        <div class="star" style="top:100px;right:90px;"></div>
-        <div class="star" style="top:150px;left:130px;"></div>
-        <div class="star" style="top:80px;right:130px;"></div>
-
-        <!-- jardín -->
-
-        <div class="garden">
-
-            <div class="grass"></div>
-
-            <div class="flower f1"></div>
-            <div class="flower f2"></div>
-            <div class="flower f3"></div>
-            <div class="flower f4"></div>
-
-        </div>
+        <div class="base"></div>
 
     </div>
 
-    <div class="base"></div>
-
 </div>
-
-<!-- MUSICA -->
 
 <audio
 id="music"
@@ -701,7 +687,7 @@ document.getElementById(
 "photoContainer"
 );
 
-/* ROTACION REAL 3D */
+/* ROTACION 3D REAL */
 
 let currentY = 0;
 
@@ -711,7 +697,7 @@ let isDragging = false;
 
 let startX = 0;
 
-/* touch inicio */
+/* TOUCH */
 
 globe.addEventListener(
 "touchstart",
@@ -724,8 +710,6 @@ globe.addEventListener(
 
 });
 
-/* touch mover */
-
 globe.addEventListener(
 "touchmove",
 (e)=>{
@@ -737,14 +721,12 @@ globe.addEventListener(
     e.touches[0].clientX
     - startX;
 
-    targetY += moveX * 0.6;
+    targetY += moveX * 0.7;
 
     startX =
     e.touches[0].clientX;
 
 });
-
-/* touch final */
 
 globe.addEventListener(
 "touchend",
@@ -754,9 +736,44 @@ globe.addEventListener(
 
 });
 
-/* animacion */
+/* MOUSE */
 
-function animate3D(){
+globe.addEventListener(
+"mousedown",
+(e)=>{
+
+    isDragging = true;
+
+    startX = e.clientX;
+
+});
+
+document.addEventListener(
+"mousemove",
+(e)=>{
+
+    if(!isDragging) return;
+
+    const moveX =
+    e.clientX - startX;
+
+    targetY += moveX * 0.7;
+
+    startX = e.clientX;
+
+});
+
+document.addEventListener(
+"mouseup",
+()=>{
+
+    isDragging = false;
+
+});
+
+/* ANIMACION 3D */
+
+function animate(){
 
     currentY +=
     (targetY-currentY)*0.08;
@@ -765,26 +782,68 @@ function animate3D(){
 
     `
     rotateY(${currentY}deg)
-    rotateX(0deg)
+    rotateX(-6deg)
     `;
 
     photoContainer.style.transform =
 
     `
-    translate(-50%,-58%)
-    rotateY(${currentY}deg)
+    translate(-50%,-50%)
+    rotateY(${-currentY}deg)
+    translateZ(40px)
     `;
 
     requestAnimationFrame(
-    animate3D
+    animate
     );
 }
 
-animate3D();
+animate();
 
-/* nieve */
+/* CORAZONES */
 
-function snow(amount=50){
+function createHeart(){
+
+    const heart =
+    document.createElement(
+    "div"
+    );
+
+    heart.className =
+    "heart";
+
+    heart.innerHTML = "❤";
+
+    heart.style.left =
+    Math.random()*85+"%";
+
+    heart.style.bottom =
+    "50px";
+
+    heart.style.animationDuration =
+    (Math.random()*3+3)+"s";
+
+    globe.appendChild(
+    heart
+    );
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },6000);
+
+}
+
+setInterval(()=>{
+
+    createHeart();
+
+},700);
+
+/* NIEVE */
+
+function snow(amount=10){
 
     for(let i=0;i<amount;i++){
 
@@ -827,48 +886,13 @@ function snow(amount=50){
 
 }
 
-/* corazones */
-
-function createHeart(){
-
-    const heart =
-    document.createElement(
-    "div"
-    );
-
-    heart.className =
-    "heart";
-
-    heart.innerHTML = "❤";
-
-    heart.style.left =
-    Math.random()*90+"%";
-
-    heart.style.bottom =
-    "50px";
-
-    heart.style.animationDuration =
-    (Math.random()*3+3)+"s";
-
-    globe.appendChild(
-    heart
-    );
-
-    setTimeout(()=>{
-
-        heart.remove();
-
-    },6000);
-
-}
-
 setInterval(()=>{
 
-    createHeart();
+    snow(6);
 
-},700);
+},1200);
 
-/* agitar */
+/* AGITAR CELULAR */
 
 let lastX,lastY,lastZ;
 
@@ -893,7 +917,7 @@ Math.abs(lastZ-acc.z);
 
 if(total>22){
 
-snow(90);
+snow(80);
 
 }
 
@@ -905,15 +929,7 @@ lastZ=acc.z;
 
 });
 
-/* nieve auto */
-
-setInterval(()=>{
-
-snow(8);
-
-},1400);
-
-/* reproducir musica */
+/* MUSICA */
 
 window.addEventListener(
 "click",
