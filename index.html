@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mi Universo ❤️</title>
 <style>
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,177 +13,181 @@
 
 body {
     min-height: 100vh;
-    overflow-y: auto; /* Permite scroll si el texto es largo en pantallas chicas */
+    background: radial-gradient(circle at center, #0a051b 0%, #020107 100%);
+    overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: black;
-    font-family: Arial, Helvetica, sans-serif;
-    perspective: 4000px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: white;
+    perspective: 2000px; /* Perspectiva global para el efecto 3D */
 }
 
-/* FONDO GALAXIA */
+/* FONDO GALAXIA Y POLVO ESTELAR */
 .bg {
     position: fixed;
     inset: 0;
     background: url("./IMG-20260518-WA0012.jpg") center center/cover no-repeat;
-    filter: brightness(.35) blur(3px);
-    transform: scale(1.1);
-    opacity: .28;
+    filter: brightness(.25) contrast(1.1) blur(2px);
+    opacity: .35;
     z-index: -20;
 }
 
-.space {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(0,120,255,.08), rgba(0,0,0,.95));
-    z-index: -19;
-}
-
-/* ESTRELLAS */
 .star {
     position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
     background: white;
-    animation: twinkle 2s infinite alternate;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: twinkle infinite alternate;
 }
 
 @keyframes twinkle {
-    from { opacity: .2; transform: scale(.6); }
-    to { opacity: 1; transform: scale(1.6); }
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.3); }
 }
 
-/* TEXTO */
+/* CONTENEDOR DE LA CARTA (DISEÑO PREMIUM) */
 .text {
     width: 100%;
+    max-width: 600px;
     text-align: center;
-    color: white;
-    padding: 15px;
+    padding: 40px 20px 20px 20px;
     z-index: 50;
 }
 
 .text h1 {
-    font-size: 28px;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-    text-shadow: 0 0 15px #fff, 0 0 25px #00e5ff;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #ffffff, #00e5ff, #ff007f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
 }
 
 .small {
-    opacity: .85;
-    margin-bottom: 14px;
-    font-size: 14px;
+    font-size: 15px;
+    opacity: 0.7;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
 }
 
-/* CARTA */
 .love-letter {
-    width: 92vw;
-    max-width: 390px;
-    margin: auto;
-    padding: 16px;
-    border-radius: 25px;
-    background: rgba(255,255,255,.08);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,.12);
-    font-size: 13px;
-    line-height: 1.7;
-    box-shadow: 0 0 25px rgba(255,255,255,.05);
+    width: 100%;
+    padding: 30px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+    line-height: 1.8;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
 }
 
-/* ESCENA */
+.love-letter::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -50%; width: 200%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent);
+    transform: rotate(30deg);
+    pointer-events: none;
+}
+
+.divider {
+    margin: 15px auto;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ff007f, #00e5ff, transparent);
+}
+
+/* ESCENA INTERACTIVA 3D */
 .scene {
     flex: 1;
     width: 100%;
+    min-height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    padding-bottom: 60px; /* Espacio para que la base no se corte */
+    padding-bottom: 80px;
+    cursor: grab;
+    user-select: none;
 }
 
-/* SISTEMA */
-.solar-system {
+.scene:active {
+    cursor: grabbing;
+}
+
+/* EL ESPACIO QUE GIRA (CÁMARA ORBITAL) */
+.orbit-wrapper {
     position: relative;
-    width: min(90vw, 420px);
-    height: min(90vw, 420px);
+    width: min(90vw, 440px);
+    height: min(90vw, 440px);
     display: flex;
     justify-content: center;
     align-items: center;
     transform-style: preserve-3d;
+    transition: transform 0.1s ease-out; /* Suaviza el movimiento */
 }
 
-/* ORBITA */
+/* ÓRBITA DE LOS CORAZONES */
 .orbit {
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.08);
-    animation: orbitRotate 18s linear infinite;
+    border: 1.5px dashed rgba(255, 255, 255, 0.15);
+    animation: orbitRotate 25s linear infinite;
     transform-style: preserve-3d;
 }
 
 @keyframes orbitRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from { transform: rotateZ(0deg); }
+    to { transform: rotateZ(360deg); }
 }
 
-/* CORAZONES ORBITANDO */
+/* CORAZONES */
 .orbit-heart {
     position: absolute;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 22px;
-    background: radial-gradient(circle, #ff4da6, #ff0066);
-    box-shadow: 0 0 15px #ff4da6, 0 0 35px #ff4da6;
+    font-size: 20px;
+    background: radial-gradient(circle at 30% 30%, #ff66b2, #ff0055);
+    box-shadow: 0 0 20px #ff0055, inset -5px -5px 10px rgba(0,0,0,0.3);
     cursor: pointer;
-    user-select: none;
-    /* Contrarresta la rotación del padre para que el corazón no se ponga de cabeza */
-    animation: counterRotate 18s linear infinite; 
+    z-index: 10;
 }
 
-@keyframes counterRotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(-360deg); }
-}
+/* Posiciones fijas en el círculo de la órbita */
+.h1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+.h2 { top: 100%; left: 50%; transform: translate(-50%, -50%); }
+.h3 { top: 50%; left: 0%; transform: translate(-50%, -50%); }
+.h4 { top: 50%; left: 100%; transform: translate(-50%, -50%); }
 
-/* Posicionamiento corregido usando porcentajes exactos */
-.h1 { top: 0%; left: 50%; }
-.h2 { top: 100%; left: 50%; }
-.h3 { top: 50%; left: 0%; }
-.h4 { top: 50%; left: 100%; }
-
-/* TEXTO TE AMO */
-.love-popup {
-    position: absolute;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    pointer-events: none;
-    text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
-    animation: popup 1.2s forwards;
-    z-index: 100;
-}
-
-@keyframes popup {
-    from { opacity: 1; transform: translate(-50%, -50%) translateY(0px) scale(.5); }
-    to { opacity: 0; transform: translate(-50%, -50%) translateY(-80px) scale(1.5); }
-}
-
-/* ESFERA */
-.globe-wrap {
+/* ESFERA DE CRISTAL (CENTRO FIJO DE LA ÓRBITA) */
+.globe-container {
     position: relative;
-    width: min(72vw, 290px);
-    height: min(72vw, 290px);
+    width: min(68vw, 280px);
+    height: min(68vw, 280px);
     transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotateX(0deg); }
+    50% { transform: translateY(-15px) rotateX(2deg); }
 }
 
 .globe {
@@ -192,93 +196,76 @@ body {
     border-radius: 50%;
     position: absolute;
     overflow: hidden;
+    background: radial-gradient(circle at 30% 20%, 
+        rgba(255, 255, 255, 0.5) 0%, 
+        rgba(255, 255, 255, 0.1) 20%, 
+        rgba(0, 150, 255, 0.05) 40%, 
+        rgba(2, 5, 22, 0.85) 100%);
+    border: 4px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset -20px -20px 50px rgba(0,0,0,0.8),
+                inset 15px 15px 30px rgba(255,255,255,0.15),
+                0 0 40px rgba(0, 170, 255, 0.2);
     transform-style: preserve-3d;
-    touch-action: none;
-    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.95), rgba(255,255,255,.15) 25%, rgba(70,180,255,.12) 42%, rgba(0,25,55,.96) 100%);
-    border: 8px solid rgba(255,255,255,.18);
-    box-shadow: inset -25px -35px 55px rgba(0,0,0,.5), inset 18px 18px 40px rgba(255,255,255,.12), 0 0 60px rgba(0,255,255,.15), 0 0 150px rgba(0,170,255,.2);
-    animation: float 5s ease-in-out infinite;
-    cursor: grab;
 }
 
-.globe:active {
-    cursor: grabbing;
-}
-
-.globe::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: radial-gradient(circle at 70% 75%, rgba(0,0,0,.45), transparent 40%);
-}
-
+/* Reflejo de cristal realista */
 .globe::after {
     content: "";
     position: absolute;
-    width: 120px;
-    height: 220px;
+    width: 70%; height: 40%;
     border-radius: 50%;
-    background: linear-gradient(to bottom, rgba(255,255,255,.7), transparent);
-    top: 18px;
-    left: 20px;
-    transform: rotate(-18deg);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
+    top: 5%; left: 15%;
+    transform: rotate(-10deg);
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* FOTO */
+/* FOTO DENTRO DE LA ESFERA */
 .photo-container {
     position: absolute;
-    left: 50%;
-    top: 48%;
-    transform-style: preserve-3d;
-    z-index: 5;
+    left: 50%; top: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
 .photo {
-    width: min(38vw, 145px);
-    height: min(38vw, 145px);
+    width: min(35vw, 135px);
+    height: min(35vw, 135px);
     border-radius: 50%;
     object-fit: cover;
-    border: 6px solid rgba(255,255,255,.85);
-    box-shadow: 0 0 35px rgba(255,255,255,.35), 0 0 80px rgba(255,0,180,.25);
+    border: 5px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 40px rgba(255, 0, 127, 0.2);
 }
 
-/* JARDIN */
+/* MUNDO INTERIOR (JARDÍN Y CÉSPED) */
 .garden {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 110px;
+    height: 95px;
     border-radius: 50% 50% 0 0;
-    background: linear-gradient(to top, #0d5f17, #37d837);
-    overflow: hidden;
+    background: linear-gradient(to top, #094010, #22aa22);
+    box-shadow: inset 0 10px 20px rgba(0,0,0,0.4);
 }
 
 .grass {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 35px;
-    background: repeating-linear-gradient(90deg, #28d628 0px, #28d628 4px, #176817 5px, #176817 8px);
+    bottom: 0; width: 100%; height: 25px;
+    background: repeating-linear-gradient(90deg, #22aa22 0px, #22aa22 3px, #116611 4px, #116611 7px);
 }
 
-/* BASE */
+/* BASE DE MADERA ELEGANTE */
 .base {
     position: absolute;
-    width: min(58vw, 220px);
-    height: min(22vw, 85px);
-    min-height: 70px;
-    bottom: -55px;
+    width: min(54vw, 210px);
+    height: 75px;
+    bottom: -45px;
     left: 50%;
-    transform: translateX(-50%);
-    border-radius: 25px;
-    background: linear-gradient(to bottom, #7a471e, #2d1407);
-    box-shadow: inset 0 6px 10px rgba(255,255,255,.2), 0 15px 25px rgba(0,0,0,.6);
+    transform: translateX(-50%) translateZ(-10px);
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #4a2711 0%, #241005 40%, #0f0602 100%);
+    box-sizing: border-box;
+    border-top: 2px solid rgba(255,255,255,0.15);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 4px 6px rgba(255,255,255,0.1);
 }
 
 .base::before {
@@ -286,33 +273,48 @@ body {
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 24px;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    top: 22px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(255, 0, 127, 0.8), 0 0 20px rgba(0, 229, 255, 0.6);
 }
 
-@media(max-width:390px){
-    .text h1 { font-size: 24px; }
-    .love-letter { font-size: 12px; }
+/* POPUPS DE TE AMO */
+.love-popup {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+    text-shadow: 0 0 15px #ff0055, 0 0 25px #ff0055;
+    z-index: 100;
+}
+
+/* RESPONSIVE */
+@media(max-width: 400px){
+    .text h1 { font-size: 28px; }
+    .love-letter { padding: 20px; font-size: 14px; }
 }
 </style>
 </head>
 <body>
 
 <div class="bg"></div>
-<div class="space"></div>
 
 <script>
-// Generador de estrellas mas eficiente
-for(let i=0; i<80; i++){
+/* GENERADOR DE POLVO CÓSMICO Y ESTRELLAS */
+for(let i=0; i<120; i++){
     const star = document.createElement("div");
     star.className = "star";
-    star.style.left = Math.random()*100+"vw";
-    star.style.top = Math.random()*100+"vh";
-    star.style.animationDuration = (Math.random()*3+1)+"s";
+    const size = Math.random() * 3 + 1;
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.animationDuration = (Math.random() * 3 + 1.5) + "s";
+    star.style.opacity = Math.random();
     document.body.appendChild(star);
 }
 </script>
@@ -320,17 +322,23 @@ for(let i=0; i<80; i++){
 <div class="text">
     <h1>🌌 Mi Universo ❤️</h1>
     <p class="small">Tú eres el centro de todo mi universo ✨</p>
+    
     <div class="love-letter">
-        Desde que llegaste a mi vida, todo comenzó a sentirse diferente.<br><br>
-        Como si mi corazón hubiera esperado toda su vida por alguien como tú.<br><br>
-        Eres mi paz, mi felicidad, mi sueño hecho realidad y la razón por la que ahora mi mundo tiene luz.<br><br>
-        Te amo muchísimo mi niña hermosa ❤️
+        Desde que llegaste a mi vida, todo comenzó a sentirse diferente.
+        <div class="divider"></div>
+        Como si mi corazón hubiera esperado toda su vida por alguien como tú.
+        <div class="divider"></div>
+        Eres mi paz, mi felicidad, mi sueño hecho realidad y la razón por la que ahora mi mundo tiene luz.
+        <div class="divider"></div>
+        <strong>Te amo muchísimo mi niña hermosa ❤️</strong>
     </div>
 </div>
 
-<div class="scene">
-    <div class="solar-system">
-        <!-- ORBITA -->
+<div class="scene" id="interactScene">
+    <!-- CONTENEDOR QUE ROTA EN 3D AL ARRASTRAR -->
+    <div class="orbit-wrapper" id="orbitWrapper">
+        
+        <!-- ÓRBITA CON CORAZONES -->
         <div class="orbit">
             <div class="orbit-heart h1">❤</div>
             <div class="orbit-heart h2">❤</div>
@@ -338,11 +346,11 @@ for(let i=0; i<80; i++){
             <div class="orbit-heart h4">❤</div>
         </div>
 
-        <!-- ESFERA -->
-        <div class="globe-wrap">
-            <div class="globe" id="globe">
-                <div class="photo-container" id="photoContainer">
-                    <img src="./IMG-20260512-WA0005.jpg" class="photo" alt="Foto">
+        <!-- ESFERA DE CRISTAL (CENTRO FIJO DE LA MIRADA) -->
+        <div class="globe-container">
+            <div class="globe">
+                <div class="photo-container">
+                    <img src="./IMG-20260512-WA0005.jpg" class="photo" alt="Tu Foto">
                 </div>
                 <div class="garden">
                     <div class="grass"></div>
@@ -350,6 +358,7 @@ for(let i=0; i<80; i++){
             </div>
             <div class="base"></div>
         </div>
+
     </div>
 </div>
 
@@ -358,88 +367,117 @@ for(let i=0; i<80; i++){
 </audio>
 
 <script>
-/* ROTACION 3D (Híbrida: Mouse y Touch) */
-const globe = document.getElementById("globe");
-const photoContainer = document.getElementById("photoContainer");
+/* EFECTO CÁMARA ORBITAL 3D REAL */
+const scene = document.getElementById("interactScene");
+const wrapper = document.getElementById("orbitWrapper");
 
-let currentY = 0;
-let targetY = 0;
+let rotX = -10; // Ángulo inicial de inclinación
+let rotY = 0;   // Ángulo inicial de rotación
 let isDragging = false;
-let startX = 0;
+let previousX = 0;
+let previousY = 0;
 
-// Manejadores comunes
-function starDrag(clientX) {
+// Valores objetivo para suavizado (Inercia)
+let targetRotX = -10;
+let targetRotY = 0;
+
+function startInteraction(clientX, clientY) {
     isDragging = true;
-    startX = clientX;
+    previousX = clientX;
+    previousY = clientY;
 }
 
-function moveDrag(clientX) {
+function moveInteraction(clientX, clientY) {
     if (!isDragging) return;
-    const moveX = clientX - startX;
-    targetY += moveX * 0.8;
-    startX = clientX;
+    
+    const deltaX = clientX - previousX;
+    const deltaY = clientY - previousY;
+
+    // Modificamos los ángulos objetivos según el arrastre
+    targetRotY += deltaX * 0.4;
+    targetRotX -= deltaY * 0.4;
+
+    // Limitamos la inclinación vertical para que no de la vuelta completa y se vea mal
+    targetRotX = Math.max(-35, Math.min(15, targetRotX));
+
+    previousX = clientX;
+    previousY = clientY;
 }
 
-function stopDrag() {
+function stopInteraction() {
     isDragging = false;
 }
 
-// Eventos táctiles (Móvil)
-globe.addEventListener("touchstart", (e) => starDrag(e.touches[0].clientX));
-window.addEventListener("touchmove", (e) => moveDrag(e.touches[0].clientX));
-window.addEventListener("touchend", stopDrag);
+// Eventos de Mouse (PC)
+scene.addEventListener("mousedown", (e) => startInteraction(e.clientX, e.clientY));
+window.addEventListener("mousemove", (e) => moveInteraction(e.clientX, e.clientY));
+window.addEventListener("mouseup", stopInteraction);
 
-// Eventos de Mouse (Computadora)
-globe.addEventListener("mousedown", (e) => starDrag(e.clientX));
-window.addEventListener("mousemove", (e) => moveDrag(e.clientX));
-window.addEventListener("mouseup", stopDrag);
+// Eventos Touch (Celular)
+scene.addEventListener("touchstart", (e) => startInteraction(e.touches[0].clientX, e.touches[0].clientY));
+window.addEventListener("touchmove", (e) => moveInteraction(e.touches[0].clientX, e.touches[0].clientY));
+window.addEventListener("touchend", stopInteraction);
 
-function animate(){
-    currentY += (targetY - currentY) * 0.08;
-    
-    // Aplicamos la rotación combinando el arrastre y el sutil ángulo en X
-    globe.style.transform = `rotateY(${currentY}deg) rotateX(-8deg)`;
-    photoContainer.style.transform = `translate(-50%,-50%) rotateY(${-currentY}deg) translateZ(50px)`;
+// Bucle de animación para lograr suavidad cinematográfica (Inercia)
+function updateCamera() {
+    rotX += (targetRotX - rotX) * 0.1;
+    rotY += (targetRotY - rotY) * 0.1;
 
-    requestAnimationFrame(animate);
+    // Hacemos que todo el universo orbite en base al arrastre del usuario
+    wrapper.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+
+    requestAnimationFrame(updateCamera);
 }
-animate();
+updateCamera();
 
-/* CORAZONES CLICK */
+
+/* INTERACCIÓN MÁGICA DE LOS CORAZONES */
 document.querySelectorAll(".orbit-heart").forEach(heart => {
     heart.addEventListener("click", (e) => {
-        // Animación nativa al hacer click
-        heart.animate([
-            { transform: 'scale(1)' },
-            { transform: 'scale(1.6)' },
-            { transform: 'scale(1)' }
-        ], { duration: 300 });
+        e.stopPropagation(); // Evita interferir con el arrastre
 
+        // Animación de pulso
+        heart.animate([
+            { transform: 'scale(1)', filter: 'brightness(1)' },
+            { transform: 'scale(1.4)', filter: 'brightness(1.3)' },
+            { transform: 'scale(1)', filter: 'brightness(1)' }
+        ], { duration: 400, easing: 'ease-out' });
+
+        // Crear popup romántico
         const popup = document.createElement("div");
         popup.className = "love-popup";
         popup.innerHTML = "TE AMO ❤️";
 
-        // Obtener la posición exacta del corazón en la pantalla
+        // Posicionamiento dinámico en la escena
         const rect = heart.getBoundingClientRect();
-        const systemRect = document.querySelector(".solar-system").getBoundingClientRect();
+        const sceneRect = scene.getBoundingClientRect();
+        
+        popup.style.left = (rect.left - sceneRect.left + rect.width/2) + "px";
+        popup.style.top = (rect.top - sceneRect.top) + "px";
 
-        // Posicionar el cartelito flotante exactamente sobre el corazón cliqueado
-        popup.style.left = (rect.left - systemRect.left + rect.width / 2) + "px";
-        popup.style.top = (rect.top - systemRect.top + rect.height / 2) + "px";
+        // Ángulo y dirección aleatoria para hacerlo más vivo y profesional
+        const randomX = (Math.random() - 0.5) * 60;
+        const randomRot = (Math.random() - 0.5) * 30;
 
-        document.querySelector(".solar-system").appendChild(popup);
+        scene.appendChild(popup);
+
+        // Animación personalizada por código
+        popup.animate([
+            { opacity: 0, transform: 'translate(-50%, 0) scale(0.6) rotate(0deg)' },
+            { opacity: 1, transform: `translate(-50%, -60px) scale(1.2) rotate(${randomRot}deg)` },
+            { opacity: 0, transform: `translate(calc(-50% + ${randomX}px), -120px) scale(0.8) rotate(${randomRot * 1.5}deg)` }
+        ], { duration: 1200, fill: 'forwards' });
 
         setTimeout(() => { popup.remove(); }, 1200);
     });
 });
 
-/* MUSICA (Cualquier interacción activa el audio) */
-window.addEventListener("click", () => {
-    document.getElementById("music").play().catch(err => console.log("Audio listo"));
-}, { once: true });
-window.addEventListener("touchstart", () => {
-    document.getElementById("music").play().catch(err => console.log("Audio listo"));
-}, { once: true });
+/* REPRODUCTOR DE MÚSICA SEGURO */
+const playMusic = () => {
+    document.getElementById("music").play().catch(() => {});
+};
+window.addEventListener("click", playMusic, { once: true });
+window.addEventListener("touchstart", playMusic, { once: true });
 </script>
 
 </body>
