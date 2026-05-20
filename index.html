@@ -3,881 +3,443 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Mi Universo ❤️</title>
-
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-
-    min-height:100vh;
-
-    overflow:hidden;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    background:black;
-
-    font-family:Arial, Helvetica, sans-serif;
-
-    perspective:4000px;
+body {
+    min-height: 100vh;
+    overflow-y: auto; /* Permite scroll si el texto es largo en pantallas chicas */
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: black;
+    font-family: Arial, Helvetica, sans-serif;
+    perspective: 4000px;
 }
 
 /* FONDO GALAXIA */
-
-.bg{
-
-    position:fixed;
-    inset:0;
-
-    background:
-    url("./IMG-20260518-WA0012.jpg")
-    center center/cover no-repeat;
-
-    filter:
-    brightness(.35)
-    blur(3px);
-
-    transform:scale(1.1);
-
-    opacity:.28;
-
-    z-index:-20;
+.bg {
+    position: fixed;
+    inset: 0;
+    background: url("./IMG-20260518-WA0012.jpg") center center/cover no-repeat;
+    filter: brightness(.35) blur(3px);
+    transform: scale(1.1);
+    opacity: .28;
+    z-index: -20;
 }
 
-.space{
-
-    position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(circle at center,
-    rgba(0,120,255,.08),
-    rgba(0,0,0,.95));
-
-    z-index:-19;
+.space {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0,120,255,.08), rgba(0,0,0,.95));
+    z-index: -19;
 }
 
 /* ESTRELLAS */
-
-.star{
-
-    position:absolute;
-
-    width:3px;
-    height:3px;
-
-    border-radius:50%;
-
-    background:white;
-
-    animation:twinkle 2s infinite alternate;
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle 2s infinite alternate;
 }
 
-@keyframes twinkle{
-
-    from{
-        opacity:.2;
-        transform:scale(.6);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1.6);
-    }
-
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(.6); }
+    to { opacity: 1; transform: scale(1.6); }
 }
 
 /* TEXTO */
-
-.text{
-
-    width:100%;
-
-    text-align:center;
-
-    color:white;
-
-    padding:15px;
-
-    z-index:50;
+.text {
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 15px;
+    z-index: 50;
 }
 
-.text h1{
-
-    font-size:28px;
-
-    letter-spacing:3px;
-
-    margin-bottom:10px;
-
-    text-shadow:
-    0 0 15px #fff,
-    0 0 25px #00e5ff;
+.text h1 {
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px #fff, 0 0 25px #00e5ff;
 }
 
-.small{
-
-    opacity:.85;
-
-    margin-bottom:14px;
-
-    font-size:14px;
+.small {
+    opacity: .85;
+    margin-bottom: 14px;
+    font-size: 14px;
 }
 
 /* CARTA */
-
-.love-letter{
-
-    width:92vw;
-
-    max-width:390px;
-
-    margin:auto;
-
-    padding:16px;
-
-    border-radius:25px;
-
-    background:
-    rgba(255,255,255,.08);
-
-    backdrop-filter:blur(12px);
-
-    border:
-    1px solid rgba(255,255,255,.12);
-
-    font-size:13px;
-
-    line-height:1.7;
-
-    box-shadow:
-    0 0 25px rgba(255,255,255,.05);
+.love-letter {
+    width: 92vw;
+    max-width: 390px;
+    margin: auto;
+    padding: 16px;
+    border-radius: 25px;
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.12);
+    font-size: 13px;
+    line-height: 1.7;
+    box-shadow: 0 0 25px rgba(255,255,255,.05);
 }
 
 /* ESCENA */
-
-.scene{
-
-    flex:1;
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    position:relative;
-
-    overflow:hidden;
+.scene {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-bottom: 60px; /* Espacio para que la base no se corte */
 }
 
 /* SISTEMA */
-
-.solar-system{
-
-    position:relative;
-
-    width:min(90vw,420px);
-    height:min(90vw,420px);
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    transform-style:preserve-3d;
+.solar-system {
+    position: relative;
+    width: min(90vw, 420px);
+    height: min(90vw, 420px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
 }
 
 /* ORBITA */
-
-.orbit{
-
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    border-radius:50%;
-
-    border:
-    1px solid rgba(255,255,255,.08);
-
-    animation:
-    orbitRotate 18s linear infinite;
+.orbit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.08);
+    animation: orbitRotate 18s linear infinite;
+    transform-style: preserve-3d;
 }
 
-@keyframes orbitRotate{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-
+@keyframes orbitRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* CORAZONES ORBITANDO */
-
-.orbit-heart{
-
-    position:absolute;
-
-    width:55px;
-    height:55px;
-
-    border-radius:50%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:white;
-
-    font-size:22px;
-
-    background:
-    radial-gradient(circle,
-    #ff4da6,
-    #ff0066);
-
-    box-shadow:
-    0 0 15px #ff4da6,
-    0 0 35px #ff4da6;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    user-select:none;
+.orbit-heart {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 22px;
+    background: radial-gradient(circle, #ff4da6, #ff0066);
+    box-shadow: 0 0 15px #ff4da6, 0 0 35px #ff4da6;
+    cursor: pointer;
+    user-select: none;
+    /* Contrarresta la rotación del padre para que el corazón no se ponga de cabeza */
+    animation: counterRotate 18s linear infinite; 
 }
 
-.orbit-heart:active{
-
-    scale:.9;
+@keyframes counterRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
 }
 
-/* posiciones */
-
-.h1{
-
-    top:-20px;
-    left:50%;
-
-    transform:translateX(-50%);
-}
-
-.h2{
-
-    bottom:-20px;
-    left:50%;
-
-    transform:translateX(-50%);
-}
-
-.h3{
-
-    left:-20px;
-    top:50%;
-
-    transform:translateY(-50%);
-}
-
-.h4{
-
-    right:-20px;
-    top:50%;
-
-    transform:translateY(-50%);
-}
+/* Posicionamiento corregido usando porcentajes exactos */
+.h1 { top: 0%; left: 50%; }
+.h2 { top: 100%; left: 50%; }
+.h3 { top: 50%; left: 0%; }
+.h4 { top: 50%; left: 100%; }
 
 /* TEXTO TE AMO */
-
-.love-popup{
-
-    position:absolute;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    pointer-events:none;
-
-    text-shadow:
-    0 0 10px #ff4da6,
-    0 0 20px #ff4da6;
-
-    animation:popup 1.2s forwards;
+.love-popup {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+    text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
+    animation: popup 1.2s forwards;
+    z-index: 100;
 }
 
-@keyframes popup{
-
-    from{
-
-        opacity:1;
-
-        transform:
-        translateY(0px)
-        scale(.5);
-    }
-
-    to{
-
-        opacity:0;
-
-        transform:
-        translateY(-80px)
-        scale(1.5);
-    }
-
+@keyframes popup {
+    from { opacity: 1; transform: translate(-50%, -50%) translateY(0px) scale(.5); }
+    to { opacity: 0; transform: translate(-50%, -50%) translateY(-80px) scale(1.5); }
 }
 
 /* ESFERA */
-
-.globe-wrap{
-
-    position:relative;
-
-    width:min(72vw,290px);
-    height:min(72vw,290px);
-
-    transform-style:preserve-3d;
+.globe-wrap {
+    position: relative;
+    width: min(72vw, 290px);
+    height: min(72vw, 290px);
+    transform-style: preserve-3d;
 }
 
-/* ESFERA REAL */
-
-.globe{
-
-    width:100%;
-    height:100%;
-
-    border-radius:50%;
-
-    position:absolute;
-
-    overflow:hidden;
-
-    transform-style:preserve-3d;
-
-    touch-action:none;
-
-    background:
-    radial-gradient(circle at 30% 20%,
-    rgba(255,255,255,.95),
-    rgba(255,255,255,.15) 25%,
-    rgba(70,180,255,.12) 42%,
-    rgba(0,25,55,.96) 100%);
-
-    border:
-    8px solid rgba(255,255,255,.18);
-
-    box-shadow:
-    inset -25px -35px 55px rgba(0,0,0,.5),
-    inset 18px 18px 40px rgba(255,255,255,.12),
-    0 0 60px rgba(0,255,255,.15),
-    0 0 150px rgba(0,170,255,.2);
-
-    animation:
-    float 5s ease-in-out infinite;
+.globe {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    touch-action: none;
+    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.95), rgba(255,255,255,.15) 25%, rgba(70,180,255,.12) 42%, rgba(0,25,55,.96) 100%);
+    border: 8px solid rgba(255,255,255,.18);
+    box-shadow: inset -25px -35px 55px rgba(0,0,0,.5), inset 18px 18px 40px rgba(255,255,255,.12), 0 0 60px rgba(0,255,255,.15), 0 0 150px rgba(0,170,255,.2);
+    animation: float 5s ease-in-out infinite;
+    cursor: grab;
 }
 
-.globe::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:50%;
-
-    background:
-    radial-gradient(circle at 70% 75%,
-    rgba(0,0,0,.45),
-    transparent 40%);
+.globe:active {
+    cursor: grabbing;
 }
 
-.globe::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:120px;
-    height:220px;
-
-    border-radius:50%;
-
-    background:
-    linear-gradient(
-    to bottom,
-    rgba(255,255,255,.7),
-    transparent);
-
-    top:18px;
-    left:20px;
-
-    transform:rotate(-18deg);
+.globe::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 70% 75%, rgba(0,0,0,.45), transparent 40%);
 }
 
-@keyframes float{
+.globe::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 220px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,.7), transparent);
+    top: 18px;
+    left: 20px;
+    transform: rotate(-18deg);
+}
 
-    0%,100%{
-        translate:0 0;
-    }
-
-    50%{
-        translate:0 -10px;
-    }
-
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 /* FOTO */
-
-.photo-container{
-
-    position:absolute;
-
-    left:50%;
-    top:48%;
-
-    transform-style:preserve-3d;
-
-    z-index:5;
+.photo-container {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform-style: preserve-3d;
+    z-index: 5;
 }
 
-.photo{
-
-    width:min(38vw,145px);
-    height:min(38vw,145px);
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:
-    6px solid rgba(255,255,255,.85);
-
-    box-shadow:
-    0 0 35px rgba(255,255,255,.35),
-    0 0 80px rgba(255,0,180,.25);
+.photo {
+    width: min(38vw, 145px);
+    height: min(38vw, 145px);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid rgba(255,255,255,.85);
+    box-shadow: 0 0 35px rgba(255,255,255,.35), 0 0 80px rgba(255,0,180,.25);
 }
 
 /* JARDIN */
-
-.garden{
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-    height:110px;
-
-    border-radius:50% 50% 0 0;
-
-    background:
-    linear-gradient(to top,
-    #0d5f17,
-    #37d837);
-
-    overflow:hidden;
+.garden {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 110px;
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient(to top, #0d5f17, #37d837);
+    overflow: hidden;
 }
 
-.grass{
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-    height:35px;
-
-    background:
-    repeating-linear-gradient(
-    90deg,
-    #28d628 0px,
-    #28d628 4px,
-    #176817 5px,
-    #176817 8px
-    );
+.grass {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+    background: repeating-linear-gradient(90deg, #28d628 0px, #28d628 4px, #176817 5px, #176817 8px);
 }
 
 /* BASE */
-
-.base{
-
-    position:absolute;
-
-    width:min(58vw,220px);
-    height:min(22vw,85px);
-
-    min-height:70px;
-
-    bottom:-55px;
-
-    left:50%;
-
-    transform:
-    translateX(-50%);
-
-    border-radius:25px;
-
-    background:
-    linear-gradient(to bottom,
-    #7a471e,
-    #2d1407);
-
-    box-shadow:
-    inset 0 6px 10px rgba(255,255,255,.2),
-    0 15px 25px rgba(0,0,0,.6);
+.base {
+    position: absolute;
+    width: min(58vw, 220px);
+    height: min(22vw, 85px);
+    min-height: 70px;
+    bottom: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #7a471e, #2d1407);
+    box-shadow: inset 0 6px 10px rgba(255,255,255,.2), 0 15px 25px rgba(0,0,0,.6);
 }
 
-.base::before{
-
-    content:"❤ NAY ❤";
-
-    position:absolute;
-
-    width:100%;
-
-    text-align:center;
-
-    top:24px;
-
-    color:white;
-
-    font-size:20px;
-
-    font-weight:bold;
-
-    letter-spacing:4px;
-
-    text-shadow:
-    0 0 10px #ff00ff,
-    0 0 20px #00ffff;
+.base::before {
+    content: "❤ NAY ❤";
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 24px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
 }
-
-/* RESPONSIVE */
 
 @media(max-width:390px){
-
-    .text h1{
-
-        font-size:24px;
-    }
-
-    .love-letter{
-
-        font-size:12px;
-    }
-
+    .text h1 { font-size: 24px; }
+    .love-letter { font-size: 12px; }
 }
-
 </style>
 </head>
-
 <body>
 
 <div class="bg"></div>
 <div class="space"></div>
 
-<!-- estrellas -->
-
 <script>
-
-for(let i=0;i<80;i++){
-
-    const star =
-    document.createElement("div");
-
-    star.className="star";
-
-    star.style.left =
-    Math.random()*100+"vw";
-
-    star.style.top =
-    Math.random()*100+"vh";
-
-    star.style.animationDuration =
-    (Math.random()*3+1)+"s";
-
-    document.body.appendChild(
-    star
-    );
+// Generador de estrellas mas eficiente
+for(let i=0; i<80; i++){
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random()*100+"vw";
+    star.style.top = Math.random()*100+"vh";
+    star.style.animationDuration = (Math.random()*3+1)+"s";
+    document.body.appendChild(star);
 }
-
 </script>
 
 <div class="text">
-
     <h1>🌌 Mi Universo ❤️</h1>
-
-    <p class="small">
-        Tú eres el centro de todo mi universo ✨
-    </p>
-
+    <p class="small">Tú eres el centro de todo mi universo ✨</p>
     <div class="love-letter">
-
-        Desde que llegaste a mi vida,
-        todo comenzó a sentirse diferente.
-
-        Como si mi corazón hubiera esperado
-        toda su vida por alguien como tú.
-
-        Eres mi paz,
-        mi felicidad,
-        mi sueño hecho realidad
-        y la razón por la que ahora
-        mi mundo tiene luz.
-
+        Desde que llegaste a mi vida, todo comenzó a sentirse diferente.<br><br>
+        Como si mi corazón hubiera esperado toda su vida por alguien como tú.<br><br>
+        Eres mi paz, mi felicidad, mi sueño hecho realidad y la razón por la que ahora mi mundo tiene luz.<br><br>
         Te amo muchísimo mi niña hermosa ❤️
-
     </div>
-
 </div>
 
 <div class="scene">
-
     <div class="solar-system">
-
         <!-- ORBITA -->
-
         <div class="orbit">
-
             <div class="orbit-heart h1">❤</div>
             <div class="orbit-heart h2">❤</div>
             <div class="orbit-heart h3">❤</div>
             <div class="orbit-heart h4">❤</div>
-
         </div>
 
         <!-- ESFERA -->
-
         <div class="globe-wrap">
-
-            <div
-            class="globe"
-            id="globe">
-
-                <div
-                class="photo-container"
-                id="photoContainer">
-
-                    <img
-                    src="./IMG-20260512-WA0005.jpg"
-                    class="photo">
-
+            <div class="globe" id="globe">
+                <div class="photo-container" id="photoContainer">
+                    <img src="./IMG-20260512-WA0005.jpg" class="photo" alt="Foto">
                 </div>
-
                 <div class="garden">
-
                     <div class="grass"></div>
-
                 </div>
-
             </div>
-
             <div class="base"></div>
-
         </div>
-
     </div>
-
 </div>
 
-<audio
-id="music"
-autoplay
-loop>
-
-<source
-src="./music.mp3"
-type="audio/mpeg">
-
+<audio id="music" autoplay loop>
+    <source src="./music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-
-/* ROTACION 3D */
-
-const globe =
-document.getElementById(
-"globe"
-);
-
-const photoContainer =
-document.getElementById(
-"photoContainer"
-);
+/* ROTACION 3D (Híbrida: Mouse y Touch) */
+const globe = document.getElementById("globe");
+const photoContainer = document.getElementById("photoContainer");
 
 let currentY = 0;
-
 let targetY = 0;
-
 let isDragging = false;
-
 let startX = 0;
 
-globe.addEventListener(
-"touchstart",
-(e)=>{
-
+// Manejadores comunes
+function starDrag(clientX) {
     isDragging = true;
-
-    startX =
-    e.touches[0].clientX;
-
-});
-
-globe.addEventListener(
-"touchmove",
-(e)=>{
-
-    if(!isDragging) return;
-
-    const moveX =
-
-    e.touches[0].clientX
-    - startX;
-
-    targetY += moveX * 0.8;
-
-    startX =
-    e.touches[0].clientX;
-
-});
-
-globe.addEventListener(
-"touchend",
-()=>{
-
-    isDragging = false;
-
-});
-
-function animate(){
-
-    currentY +=
-    (targetY-currentY)*0.08;
-
-    globe.style.transform =
-
-    `
-    rotateY(${currentY}deg)
-    rotateX(-8deg)
-    `;
-
-    photoContainer.style.transform =
-
-    `
-    translate(-50%,-50%)
-    rotateY(${-currentY}deg)
-    translateZ(50px)
-    `;
-
-    requestAnimationFrame(
-    animate
-    );
+    startX = clientX;
 }
 
+function moveDrag(clientX) {
+    if (!isDragging) return;
+    const moveX = clientX - startX;
+    targetY += moveX * 0.8;
+    startX = clientX;
+}
+
+function stopDrag() {
+    isDragging = false;
+}
+
+// Eventos táctiles (Móvil)
+globe.addEventListener("touchstart", (e) => starDrag(e.touches[0].clientX));
+window.addEventListener("touchmove", (e) => moveDrag(e.touches[0].clientX));
+window.addEventListener("touchend", stopDrag);
+
+// Eventos de Mouse (Computadora)
+globe.addEventListener("mousedown", (e) => starDrag(e.clientX));
+window.addEventListener("mousemove", (e) => moveDrag(e.clientX));
+window.addEventListener("mouseup", stopDrag);
+
+function animate(){
+    currentY += (targetY - currentY) * 0.08;
+    
+    // Aplicamos la rotación combinando el arrastre y el sutil ángulo en X
+    globe.style.transform = `rotateY(${currentY}deg) rotateX(-8deg)`;
+    photoContainer.style.transform = `translate(-50%,-50%) rotateY(${-currentY}deg) translateZ(50px)`;
+
+    requestAnimationFrame(animate);
+}
 animate();
 
 /* CORAZONES CLICK */
+document.querySelectorAll(".orbit-heart").forEach(heart => {
+    heart.addEventListener("click", (e) => {
+        // Animación nativa al hacer click
+        heart.animate([
+            { transform: 'scale(1)' },
+            { transform: 'scale(1.6)' },
+            { transform: 'scale(1)' }
+        ], { duration: 300 });
 
-document
-.querySelectorAll(
-".orbit-heart"
-)
-.forEach(heart=>{
+        const popup = document.createElement("div");
+        popup.className = "love-popup";
+        popup.innerHTML = "TE AMO ❤️";
 
-heart.addEventListener(
-"click",
-()=>{
+        // Obtener la posición exacta del corazón en la pantalla
+        const rect = heart.getBoundingClientRect();
+        const systemRect = document.querySelector(".solar-system").getBoundingClientRect();
 
-    heart.animate([
+        // Posicionar el cartelito flotante exactamente sobre el corazón cliqueado
+        popup.style.left = (rect.left - systemRect.left + rect.width / 2) + "px";
+        popup.style.top = (rect.top - systemRect.top + rect.height / 2) + "px";
 
-        {
-            transform:'scale(1)'
-        },
+        document.querySelector(".solar-system").appendChild(popup);
 
-        {
-            transform:'scale(1.6)'
-        },
-
-        {
-            transform:'scale(.2)'
-        }
-
-    ],{
-
-        duration:500
-
+        setTimeout(() => { popup.remove(); }, 1200);
     });
-
-    const popup =
-    document.createElement(
-    "div"
-    );
-
-    popup.className =
-    "love-popup";
-
-    popup.innerHTML =
-    "TE AMO ❤️";
-
-    popup.style.left =
-    heart.offsetLeft+"px";
-
-    popup.style.top =
-    heart.offsetTop+"px";
-
-    document
-    .querySelector(
-    ".solar-system"
-    )
-    .appendChild(
-    popup
-    );
-
-    setTimeout(()=>{
-
-        popup.remove();
-
-    },1200);
-
 });
 
-});
-
-/* MUSICA */
-
-window.addEventListener(
-"click",
-()=>{
-
-document
-.getElementById(
-"music"
-)
-.play();
-
-},{once:true});
-
+/* MUSICA (Cualquier interacción activa el audio) */
+window.addEventListener("click", () => {
+    document.getElementById("music").play().catch(err => console.log("Audio listo"));
+}, { once: true });
+window.addEventListener("touchstart", () => {
+    document.getElementById("music").play().catch(err => console.log("Audio listo"));
+}, { once: true });
 </script>
 
 </body>
