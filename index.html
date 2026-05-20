@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Esfera 3D Love Premium</title>
+
+<title>Mi Ojitos de Uva ❤️</title>
 
 <style>
 
@@ -14,66 +15,91 @@
 }
 
 body{
+
     overflow:hidden;
+
     height:100vh;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     background:#000;
+
     font-family:Arial, Helvetica, sans-serif;
-    perspective:1800px;
+
+    perspective:2200px;
 }
 
-/* Fondo GitHub */
+/* FONDO */
 
 .bg{
+
     position:fixed;
+
     inset:0;
 
     background:
     url("./IMG-20260518-WA0012.jpg")
     center center/cover no-repeat;
 
-    opacity:.20;
+    opacity:.18;
 
     filter:
     blur(2px)
     brightness(.7);
 
-    z-index:-5;
-
     transform:scale(1.1);
+
+    z-index:-5;
 }
 
-/* Oscurecer fondo */
+/* overlay */
 
 .overlay{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.35);
+
+    background:
+    rgba(0,0,0,.45);
+
     z-index:-4;
 }
 
-/* Luces ambiente */
+/* luces */
 
 .light{
+
     position:absolute;
-    width:450px;
-    height:450px;
+
+    width:500px;
+    height:500px;
+
     border-radius:50%;
-    filter:blur(100px);
+
+    filter:blur(120px);
+
     opacity:.5;
+
     animation:move 8s infinite alternate ease-in-out;
 }
 
 .light1{
-    background:#00d9ff;
+
+    background:#00e5ff;
+
     top:-120px;
     left:-120px;
 }
 
 .light2{
-    background:#ff00f2;
+
+    background:#ff00e6;
+
     bottom:-120px;
     right:-120px;
 }
@@ -90,37 +116,110 @@ body{
 
 }
 
-/* Texto */
+/* TEXTO */
 
 .text{
+
     position:absolute;
-    top:25px;
+
+    top:20px;
+
     width:100%;
+
     text-align:center;
+
     color:white;
-    z-index:100;
+
+    z-index:200;
+
+    padding:0 15px;
 
     text-shadow:
-    0 0 10px rgba(255,255,255,.6),
-    0 0 20px rgba(0,255,255,.4);
+    0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(0,255,255,.2);
 }
 
 .text h1{
-    font-size:28px;
+
+    font-size:30px;
+
     letter-spacing:4px;
+
+    margin-bottom:10px;
 }
 
-.text p{
-    margin-top:10px;
+.small{
+
     opacity:.85;
+
+    margin-bottom:16px;
 }
 
-/* Escena */
+/* CARTA */
+
+.love-letter{
+
+    width:360px;
+
+    max-width:92vw;
+
+    margin:auto;
+
+    padding:20px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    backdrop-filter:blur(14px);
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    color:white;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    box-shadow:
+    0 0 25px rgba(255,255,255,.05);
+
+    animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0px);
+
+    }
+
+}
+
+/* ESCENA */
 
 .scene{
+
     position:relative;
+
     width:430px;
     height:430px;
+
     transform-style:preserve-3d;
 }
 
@@ -143,16 +242,16 @@ body{
 
     background:
     radial-gradient(circle at 30% 20%,
-    rgba(255,255,255,.9),
+    rgba(255,255,255,.92),
     rgba(255,255,255,.12) 28%,
     rgba(0,40,90,.96) 100%);
 
     border:8px solid rgba(255,255,255,.22);
 
     box-shadow:
-    inset 0 0 40px rgba(255,255,255,.35),
+    inset 0 0 45px rgba(255,255,255,.35),
     0 0 60px rgba(0,255,255,.2),
-    0 0 150px rgba(0,170,255,.25);
+    0 0 160px rgba(0,170,255,.25);
 
     animation:float 4s ease-in-out infinite;
 }
@@ -160,11 +259,17 @@ body{
 @keyframes float{
 
     0%,100%{
-        transform:translateY(0px);
+
+        transform:
+        translateY(0px);
+
     }
 
     50%{
-        transform:translateY(-12px);
+
+        transform:
+        translateY(-12px);
+
     }
 
 }
@@ -183,38 +288,37 @@ body{
     background:
     linear-gradient(
     to bottom,
-    rgba(255,255,255,.55),
+    rgba(255,255,255,.6),
     transparent);
 
     top:18px;
     left:35px;
 
     transform:rotate(-18deg);
-
 }
 
-/* jardín */
+/* JARDIN */
 
 .garden{
 
     position:absolute;
 
     width:100%;
-    height:125px;
+    height:130px;
 
     bottom:0;
 
     background:
     linear-gradient(to top,
-    #0d6416,
-    #36d336);
+    #0c5f14,
+    #35d235);
 
     border-radius:50% 50% 0 0;
 
     overflow:hidden;
 }
 
-/* pasto */
+/* PASTO */
 
 .grass{
 
@@ -233,16 +337,19 @@ body{
     #176817 5px,
     #176817 8px
     );
-
 }
 
 /* flores */
 
 .flower{
+
     position:absolute;
+
     width:12px;
     height:12px;
+
     border-radius:50%;
+
     bottom:35px;
 
     box-shadow:
@@ -253,22 +360,30 @@ body{
 }
 
 .f1{
+
     left:60px;
+
     color:pink;
 }
 
 .f2{
+
     left:130px;
+
     color:yellow;
 }
 
 .f3{
+
     right:80px;
+
     color:cyan;
 }
 
 .f4{
+
     right:150px;
+
     color:#ff66ff;
 }
 
@@ -286,37 +401,42 @@ body{
     rotateY(0deg);
 
     transform-style:preserve-3d;
-
-    transition:transform .15s linear;
-
 }
+
+/* FOTO */
 
 .photo{
 
-    width:195px;
-    height:195px;
+    width:200px;
+    height:200px;
 
     border-radius:50%;
 
     object-fit:cover;
 
-    border:7px solid rgba(255,255,255,.75);
+    border:7px solid rgba(255,255,255,.8);
 
     box-shadow:
-    0 0 35px rgba(255,255,255,.4),
-    0 0 70px rgba(255,0,200,.25);
+    0 0 40px rgba(255,255,255,.4),
+    0 0 80px rgba(255,0,200,.25);
 
-    animation:spinPhoto 10s linear infinite;
+    animation:spinPhoto 12s linear infinite;
 }
 
 @keyframes spinPhoto{
 
     from{
-        transform:rotateY(0deg);
+
+        transform:
+        rotateY(0deg);
+
     }
 
     to{
-        transform:rotateY(360deg);
+
+        transform:
+        rotateY(360deg);
+
     }
 
 }
@@ -327,14 +447,15 @@ body{
 
     position:absolute;
 
-    width:290px;
-    height:100px;
+    width:300px;
+    height:105px;
 
-    bottom:-68px;
+    bottom:-72px;
 
     left:50%;
 
-    transform:translateX(-50%);
+    transform:
+    translateX(-50%);
 
     background:
     linear-gradient(to bottom,
@@ -355,9 +476,10 @@ body{
     position:absolute;
 
     left:50%;
-    top:30px;
+    top:33px;
 
-    transform:translateX(-50%);
+    transform:
+    translateX(-50%);
 
     color:white;
 
@@ -373,7 +495,7 @@ body{
     0 0 30px #ff00ff;
 }
 
-/* nieve */
+/* NIEVE */
 
 .snow{
 
@@ -391,18 +513,24 @@ body{
 @keyframes fall{
 
     from{
-        transform:translateY(-20px);
+
+        transform:
+        translateY(-20px);
+
         opacity:1;
     }
 
     to{
-        transform:translateY(500px);
+
+        transform:
+        translateY(500px);
+
         opacity:0;
     }
 
 }
 
-/* brillos */
+/* BRILLOS */
 
 .spark{
 
@@ -449,23 +577,32 @@ body{
 @media(max-width:480px){
 
     .scene{
+
         width:340px;
         height:340px;
     }
 
     .photo{
+
         width:160px;
         height:160px;
     }
 
     .base{
+
         width:240px;
+    }
+
+    .love-letter{
+
+        font-size:13px;
     }
 
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="bg"></div>
@@ -475,19 +612,50 @@ body{
 <div class="light light1"></div>
 <div class="light light2"></div>
 
+<!-- TEXTO -->
+
 <div class="text">
 
     <h1>❄ Mi Ojitos de Uva ❄</h1>
 
-    <p>
-        Toca o agita tu celular ✨
+    <p class="small">
+        Toca o gira nuestra esfera ✨
     </p>
+
+    <div class="love-letter">
+
+        Desde que llegaste a mi vida,
+        todo comenzó a sentirse diferente.
+
+        Como si mi corazón hubiera esperado
+        toda su vida por alguien como tú.
+
+        Eres esa paz bonita que nunca imaginé encontrar,
+        la sonrisa que ilumina mis días
+        y el abrazo donde quisiera quedarme para siempre.
+
+        Contigo entendí que el amor sí puede sentirse mágico,
+        sincero y eterno.
+
+        Gracias por existir,
+        por hacerme feliz,
+        por convertirte en mi lugar favorito
+        y en el sueño más bonito
+        que la vida me pudo regalar.
+
+        Te amo muchísimo mi niña hermosa ❤️
+
+    </div>
 
 </div>
 
+<!-- ESFERA -->
+
 <div class="scene">
 
-    <div class="globe" id="globe">
+    <div
+    class="globe"
+    id="globe">
 
         <div class="reflection"></div>
 
@@ -522,7 +690,7 @@ body{
 
 </div>
 
-<!-- Música -->
+<!-- MUSICA -->
 
 <audio
 id="music"
@@ -530,7 +698,7 @@ autoplay
 loop>
 
 <source
-src="https://files.catbox.moe/6r6q7l.mp3"
+src="./music.mp3"
 type="audio/mpeg">
 
 </audio>
@@ -538,7 +706,9 @@ type="audio/mpeg">
 <script>
 
 const globe =
-document.getElementById("globe");
+document.getElementById(
+"globe"
+);
 
 const photoContainer =
 document.getElementById(
@@ -552,7 +722,9 @@ function snow(amount=60){
     for(let i=0;i<amount;i++){
 
         const snow =
-        document.createElement("div");
+        document.createElement(
+        "div"
+        );
 
         snow.className="snow";
 
@@ -574,7 +746,9 @@ function snow(amount=60){
         snow.style.animationDuration =
         (Math.random()*3+2)+"s";
 
-        globe.appendChild(snow);
+        globe.appendChild(
+        snow
+        );
 
         setTimeout(()=>{
 
@@ -593,9 +767,12 @@ function sparks(amount=35){
     for(let i=0;i<amount;i++){
 
         const spark =
-        document.createElement("div");
+        document.createElement(
+        "div"
+        );
 
-        spark.className="spark";
+        spark.className =
+        "spark";
 
         spark.style.left =
         Math.random()*100+"%";
@@ -603,7 +780,9 @@ function sparks(amount=35){
         spark.style.top =
         Math.random()*100+"%";
 
-        globe.appendChild(spark);
+        globe.appendChild(
+        spark
+        );
 
         setTimeout(()=>{
 
@@ -621,13 +800,25 @@ function shakeEffect(){
 
     globe.animate([
 
-        { transform:'translateX(-8px)' },
+        {
+            transform:
+            'translateX(-8px)'
+        },
 
-        { transform:'translateX(8px)' },
+        {
+            transform:
+            'translateX(8px)'
+        },
 
-        { transform:'translateX(-8px)' },
+        {
+            transform:
+            'translateX(-8px)'
+        },
 
-        { transform:'translateX(0px)' }
+        {
+            transform:
+            'translateX(0px)'
+        }
 
     ],{
 
@@ -636,6 +827,7 @@ function shakeEffect(){
     });
 
     snow(100);
+
     sparks(60);
 
 }
@@ -650,27 +842,93 @@ globe.addEventListener(
 
 });
 
-/* movimiento 3D */
+/* ROTACION 3D REAL */
+
+let rotateY = 0;
+
+let isDragging = false;
+
+let startX = 0;
+
+/* mouse */
+
+globe.addEventListener(
+"mousedown",
+(e)=>{
+
+    isDragging = true;
+
+    startX = e.clientX;
+
+});
+
+document.addEventListener(
+"mouseup",
+()=>{
+
+    isDragging = false;
+
+});
 
 document.addEventListener(
 "mousemove",
 (e)=>{
 
-    const x =
-    (window.innerWidth/2-e.pageX)/18;
+    if(!isDragging) return;
 
-    const y =
-    (window.innerHeight/2-e.pageY)/18;
+    const moveX =
+    e.clientX - startX;
+
+    rotateY +=
+    moveX * 0.4;
 
     globe.style.transform =
 
-    `rotateY(${-x}deg)
-    rotateX(${y}deg)`;
+    `rotateY(${rotateY}deg)`;
 
     photoContainer.style.transform =
 
     `translate(-50%,-58%)
-    rotateY(${x*2}deg)`;
+    rotateY(${rotateY}deg)`;
+
+    startX = e.clientX;
+
+});
+
+/* touch celular */
+
+globe.addEventListener(
+"touchstart",
+(e)=>{
+
+    startX =
+    e.touches[0].clientX;
+
+});
+
+globe.addEventListener(
+"touchmove",
+(e)=>{
+
+    const moveX =
+
+    e.touches[0].clientX
+    - startX;
+
+    rotateY +=
+    moveX * 0.45;
+
+    globe.style.transform =
+
+    `rotateY(${rotateY}deg)`;
+
+    photoContainer.style.transform =
+
+    `translate(-50%,-58%)
+    rotateY(${rotateY}deg)`;
+
+    startX =
+    e.touches[0].clientX;
 
 });
 
@@ -683,7 +941,9 @@ window.addEventListener(
 (event)=>{
 
 const acc =
-event.accelerationIncludingGravity;
+
+event
+.accelerationIncludingGravity;
 
 if(!acc) return;
 
@@ -709,7 +969,7 @@ lastZ=acc.z;
 
 });
 
-/* nieve automática */
+/* nieve auto */
 
 setInterval(()=>{
 
@@ -717,14 +977,16 @@ snow(10);
 
 },1200);
 
-/* música */
+/* reproducir musica */
 
 window.addEventListener(
 "click",
 ()=>{
 
 document
-.getElementById("music")
+.getElementById(
+"music"
+)
 .play();
 
 },{once:true});
