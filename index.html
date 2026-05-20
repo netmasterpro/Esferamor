@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Esfera 3D Love</title>
+<title>Esfera 3D Love Premium</title>
 
 <style>
 
@@ -21,43 +21,59 @@ body{
     align-items:center;
     background:#000;
     font-family:Arial, Helvetica, sans-serif;
-    perspective:1600px;
+    perspective:1800px;
 }
 
-/* Fondo */
+/* Fondo GitHub */
 
 .bg{
     position:fixed;
     inset:0;
+
     background:
-    url("IMG-20260518-WA0012.jpg")
+    url("./IMG-20260518-WA0012.jpg")
     center center/cover no-repeat;
 
-    opacity:0.22;
-    filter:blur(1px);
-    z-index:-3;
+    opacity:.20;
+
+    filter:
+    blur(2px)
+    brightness(.7);
+
+    z-index:-5;
+
+    transform:scale(1.1);
 }
 
-/* Luces */
+/* Oscurecer fondo */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.35);
+    z-index:-4;
+}
+
+/* Luces ambiente */
 
 .light{
     position:absolute;
-    width:400px;
-    height:400px;
+    width:450px;
+    height:450px;
     border-radius:50%;
-    filter:blur(90px);
+    filter:blur(100px);
     opacity:.5;
     animation:move 8s infinite alternate ease-in-out;
 }
 
 .light1{
-    background:#00ccff;
+    background:#00d9ff;
     top:-120px;
     left:-120px;
 }
 
 .light2{
-    background:#ff00d4;
+    background:#ff00f2;
     bottom:-120px;
     right:-120px;
 }
@@ -74,39 +90,69 @@ body{
 
 }
 
+/* Texto */
+
+.text{
+    position:absolute;
+    top:25px;
+    width:100%;
+    text-align:center;
+    color:white;
+    z-index:100;
+
+    text-shadow:
+    0 0 10px rgba(255,255,255,.6),
+    0 0 20px rgba(0,255,255,.4);
+}
+
+.text h1{
+    font-size:28px;
+    letter-spacing:4px;
+}
+
+.text p{
+    margin-top:10px;
+    opacity:.85;
+}
+
 /* Escena */
 
 .scene{
     position:relative;
-    width:420px;
-    height:420px;
+    width:430px;
+    height:430px;
     transform-style:preserve-3d;
 }
 
-/* Esfera */
+/* ESFERA */
 
 .globe{
+
     width:100%;
     height:100%;
+
     border-radius:50%;
+
     position:relative;
+
     overflow:hidden;
+
+    transform-style:preserve-3d;
+
     cursor:grab;
 
     background:
     radial-gradient(circle at 30% 20%,
-    rgba(255,255,255,.85),
-    rgba(255,255,255,.1) 30%,
-    rgba(0,50,90,.95) 100%);
+    rgba(255,255,255,.9),
+    rgba(255,255,255,.12) 28%,
+    rgba(0,40,90,.96) 100%);
 
-    border:8px solid rgba(255,255,255,.2);
+    border:8px solid rgba(255,255,255,.22);
 
     box-shadow:
-    inset 0 0 30px rgba(255,255,255,.3),
+    inset 0 0 40px rgba(255,255,255,.35),
     0 0 60px rgba(0,255,255,.2),
-    0 0 140px rgba(0,180,255,.2);
-
-    transform-style:preserve-3d;
+    0 0 150px rgba(0,170,255,.25);
 
     animation:float 4s ease-in-out infinite;
 }
@@ -118,127 +164,147 @@ body{
     }
 
     50%{
-        transform:translateY(-10px);
+        transform:translateY(-12px);
     }
 
 }
 
-/* Reflejo */
+/* reflejo */
 
 .reflection{
+
     position:absolute;
-    width:120px;
-    height:240px;
+
+    width:130px;
+    height:250px;
+
     border-radius:50%;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
     to bottom,
-    rgba(255,255,255,.5),
+    rgba(255,255,255,.55),
     transparent);
 
+    top:18px;
     left:35px;
-    top:20px;
 
     transform:rotate(-18deg);
+
 }
 
-/* Jardín */
+/* jardín */
 
 .garden{
+
     position:absolute;
+
     width:100%;
-    height:120px;
+    height:125px;
+
     bottom:0;
 
     background:
     linear-gradient(to top,
-    #0d5f17,
-    #32cd32);
+    #0d6416,
+    #36d336);
 
     border-radius:50% 50% 0 0;
 
     overflow:hidden;
 }
 
-/* Pasto */
+/* pasto */
 
 .grass{
+
     position:absolute;
+
     bottom:0;
+
     width:100%;
     height:40px;
 
     background:
     repeating-linear-gradient(
     90deg,
-    #29c729 0px,
-    #29c729 4px,
-    #1c7e1c 5px,
-    #1c7e1c 8px
+    #2ed82e 0px,
+    #2ed82e 4px,
+    #176817 5px,
+    #176817 8px
     );
+
 }
 
-/* Flores */
+/* flores */
 
 .flower{
     position:absolute;
     width:12px;
     height:12px;
-    background:pink;
     border-radius:50%;
     bottom:35px;
 
     box-shadow:
-    12px 0 pink,
-    -12px 0 pink,
-    0 12px pink,
-    0 -12px pink;
+    12px 0 currentColor,
+    -12px 0 currentColor,
+    0 12px currentColor,
+    0 -12px currentColor;
 }
 
-.f1{ left:50px; }
+.f1{
+    left:60px;
+    color:pink;
+}
 
 .f2{
-    left:120px;
-    background:yellow;
+    left:130px;
+    color:yellow;
 }
 
 .f3{
     right:80px;
-    background:cyan;
+    color:cyan;
 }
 
 .f4{
     right:150px;
-    background:#ff66ff;
+    color:#ff66ff;
 }
 
-/* Foto */
+/* FOTO */
 
 .photo-container{
+
     position:absolute;
+
     left:50%;
     top:50%;
 
-    transform-style:preserve-3d;
-
     transform:
-    translate(-50%,-55%)
+    translate(-50%,-58%)
     rotateY(0deg);
 
-    transition:transform .2s;
+    transform-style:preserve-3d;
+
+    transition:transform .15s linear;
+
 }
 
 .photo{
-    width:190px;
-    height:190px;
+
+    width:195px;
+    height:195px;
+
     border-radius:50%;
+
     object-fit:cover;
 
-    border:7px solid rgba(255,255,255,.7);
+    border:7px solid rgba(255,255,255,.75);
 
     box-shadow:
-    0 0 30px rgba(255,255,255,.3),
-    0 0 60px rgba(255,0,200,.25);
+    0 0 35px rgba(255,255,255,.4),
+    0 0 70px rgba(255,0,200,.25);
 
     animation:spinPhoto 10s linear infinite;
 }
@@ -255,26 +321,30 @@ body{
 
 }
 
-/* Base */
+/* BASE */
 
 .base{
+
     position:absolute;
-    width:280px;
-    height:95px;
-    bottom:-65px;
+
+    width:290px;
+    height:100px;
+
+    bottom:-68px;
+
     left:50%;
 
     transform:translateX(-50%);
 
     background:
     linear-gradient(to bottom,
-    #74451d,
-    #2d1507);
+    #77441b,
+    #2c1306);
 
-    border-radius:25px;
+    border-radius:28px;
 
     box-shadow:
-    inset 0 5px 10px rgba(255,255,255,.2),
+    inset 0 6px 10px rgba(255,255,255,.2),
     0 15px 25px rgba(0,0,0,.6);
 }
 
@@ -285,26 +355,34 @@ body{
     position:absolute;
 
     left:50%;
-    top:28px;
+    top:30px;
 
     transform:translateX(-50%);
 
     color:white;
-    font-size:24px;
+
+    font-size:26px;
+
     font-weight:bold;
-    letter-spacing:4px;
+
+    letter-spacing:5px;
 
     text-shadow:
     0 0 10px #ff00ff,
-    0 0 20px #00ffff;
+    0 0 20px #00ffff,
+    0 0 30px #ff00ff;
 }
 
 /* nieve */
 
 .snow{
+
     position:absolute;
+
     background:white;
+
     border-radius:50%;
+
     pointer-events:none;
 
     animation:fall linear forwards;
@@ -318,36 +396,45 @@ body{
     }
 
     to{
-        transform:translateY(450px);
+        transform:translateY(500px);
         opacity:0;
     }
 
 }
 
-/* brillo */
+/* brillos */
 
 .spark{
+
     position:absolute;
+
     width:5px;
     height:5px;
+
     border-radius:50%;
+
     background:white;
 
     box-shadow:
     0 0 10px white,
-    0 0 20px cyan;
+    0 0 20px cyan,
+    0 0 30px cyan;
 
-    animation:spark 1.5s linear forwards;
+    animation:spark 1.4s linear forwards;
 }
 
 @keyframes spark{
 
     from{
-        transform:scale(.2);
+
+        transform:
+        scale(.2);
+
         opacity:1;
     }
 
     to{
+
         transform:
         translateY(-100px)
         scale(2);
@@ -357,42 +444,22 @@ body{
 
 }
 
-/* texto */
-
-.text{
-    position:absolute;
-    top:25px;
-    width:100%;
-    text-align:center;
-    color:white;
-    z-index:20;
-
-    text-shadow:
-    0 0 10px rgba(255,255,255,.5);
-}
-
-.text h1{
-    font-size:26px;
-    letter-spacing:3px;
-}
-
-.text p{
-    margin-top:8px;
-    opacity:.8;
-}
-
 /* responsive */
 
 @media(max-width:480px){
 
     .scene{
-        width:330px;
-        height:330px;
+        width:340px;
+        height:340px;
     }
 
     .photo{
         width:160px;
         height:160px;
+    }
+
+    .base{
+        width:240px;
     }
 
 }
@@ -403,6 +470,8 @@ body{
 
 <div class="bg"></div>
 
+<div class="overlay"></div>
+
 <div class="light light1"></div>
 <div class="light light2"></div>
 
@@ -411,7 +480,7 @@ body{
     <h1>❄ Mi Ojitos de Uva ❄</h1>
 
     <p>
-        Agita el celular o toca la esfera ✨
+        Toca o agita tu celular ✨
     </p>
 
 </div>
@@ -422,15 +491,19 @@ body{
 
         <div class="reflection"></div>
 
+        <!-- FOTO -->
+
         <div
         class="photo-container"
         id="photoContainer">
 
             <img
-            src="IMG-20260512-WA0005.jpg"
+            src="./IMG-20260512-WA0005.jpg"
             class="photo">
 
         </div>
+
+        <!-- JARDIN -->
 
         <div class="garden">
 
@@ -448,6 +521,8 @@ body{
     <div class="base"></div>
 
 </div>
+
+<!-- Música -->
 
 <audio
 id="music"
@@ -472,7 +547,7 @@ document.getElementById(
 
 /* nieve */
 
-function snow(amount=50){
+function snow(amount=60){
 
     for(let i=0;i<amount;i++){
 
@@ -481,21 +556,22 @@ function snow(amount=50){
 
         snow.className="snow";
 
-        const size=
+        const size =
         Math.random()*7+2;
 
-        snow.style.width=
+        snow.style.width =
         size+"px";
 
-        snow.style.height=
+        snow.style.height =
         size+"px";
 
-        snow.style.left=
+        snow.style.left =
         Math.random()*100+"%";
 
-        snow.style.top="-20px";
+        snow.style.top =
+        "-20px";
 
-        snow.style.animationDuration=
+        snow.style.animationDuration =
         (Math.random()*3+2)+"s";
 
         globe.appendChild(snow);
@@ -512,19 +588,19 @@ function snow(amount=50){
 
 /* brillos */
 
-function sparks(amount=30){
+function sparks(amount=35){
 
     for(let i=0;i<amount;i++){
 
-        const spark=
+        const spark =
         document.createElement("div");
 
         spark.className="spark";
 
-        spark.style.left=
+        spark.style.left =
         Math.random()*100+"%";
 
-        spark.style.top=
+        spark.style.top =
         Math.random()*100+"%";
 
         globe.appendChild(spark);
@@ -539,7 +615,7 @@ function sparks(amount=30){
 
 }
 
-/* agitar */
+/* efecto */
 
 function shakeEffect(){
 
@@ -559,8 +635,8 @@ function shakeEffect(){
 
     });
 
-    snow(90);
-    sparks(50);
+    snow(100);
+    sparks(60);
 
 }
 
@@ -586,12 +662,14 @@ document.addEventListener(
     const y =
     (window.innerHeight/2-e.pageY)/18;
 
-    globe.style.transform=
+    globe.style.transform =
+
     `rotateY(${-x}deg)
     rotateX(${y}deg)`;
 
-    photoContainer.style.transform=
-    `translate(-50%,-55%)
+    photoContainer.style.transform =
+
+    `translate(-50%,-58%)
     rotateY(${x*2}deg)`;
 
 });
@@ -604,14 +682,14 @@ window.addEventListener(
 "devicemotion",
 (event)=>{
 
-const acc=
+const acc =
 event.accelerationIncludingGravity;
 
 if(!acc) return;
 
 if(lastX!==undefined){
 
-const total=
+const total =
 
 Math.abs(lastX-acc.x)+
 Math.abs(lastY-acc.y)+
