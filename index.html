@@ -20,17 +20,11 @@ body{
 
     height:100vh;
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
     background:#000;
 
     font-family:Arial, Helvetica, sans-serif;
 
-    perspective:2200px;
+    perspective:2500px;
 }
 
 /* FONDO */
@@ -45,18 +39,18 @@ body{
     url("./IMG-20260518-WA0012.jpg")
     center center/cover no-repeat;
 
-    opacity:.18;
+    opacity:.16;
 
     filter:
-    blur(2px)
-    brightness(.7);
+    blur(3px)
+    brightness(.6);
 
     transform:scale(1.1);
 
     z-index:-5;
 }
 
-/* overlay */
+/* OSCURECER */
 
 .overlay{
 
@@ -70,7 +64,7 @@ body{
     z-index:-4;
 }
 
-/* luces */
+/* LUCES */
 
 .light{
 
@@ -122,7 +116,7 @@ body{
 
     position:absolute;
 
-    top:20px;
+    top:12px;
 
     width:100%;
 
@@ -132,7 +126,7 @@ body{
 
     z-index:200;
 
-    padding:0 15px;
+    padding:0 14px;
 
     text-shadow:
     0 0 10px rgba(255,255,255,.5),
@@ -141,31 +135,33 @@ body{
 
 .text h1{
 
-    font-size:30px;
+    font-size:28px;
 
     letter-spacing:4px;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .small{
 
     opacity:.85;
 
-    margin-bottom:16px;
+    margin-bottom:14px;
+
+    font-size:14px;
 }
 
 /* CARTA */
 
 .love-letter{
 
-    width:360px;
+    width:92vw;
 
-    max-width:92vw;
+    max-width:390px;
 
     margin:auto;
 
-    padding:20px;
+    padding:18px;
 
     border-radius:24px;
 
@@ -179,7 +175,7 @@ body{
 
     color:white;
 
-    font-size:14px;
+    font-size:13px;
 
     line-height:1.8;
 
@@ -215,20 +211,31 @@ body{
 
 .scene{
 
-    position:relative;
+    position:absolute;
 
-    width:430px;
-    height:430px;
+    bottom:70px;
+
+    width:100vw;
+
+    height:52vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     transform-style:preserve-3d;
+
+    overflow:hidden;
 }
 
 /* ESFERA */
 
 .globe{
 
-    width:100%;
-    height:100%;
+    width:310px;
+    height:310px;
 
     border-radius:50%;
 
@@ -240,11 +247,13 @@ body{
 
     cursor:grab;
 
+    touch-action:none;
+
     background:
     radial-gradient(circle at 30% 20%,
-    rgba(255,255,255,.92),
+    rgba(255,255,255,.95),
     rgba(255,255,255,.12) 28%,
-    rgba(0,40,90,.96) 100%);
+    rgba(0,40,90,.97) 100%);
 
     border:8px solid rgba(255,255,255,.22);
 
@@ -260,28 +269,24 @@ body{
 
     0%,100%{
 
-        transform:
-        translateY(0px);
-
+        translate:0 0;
     }
 
     50%{
 
-        transform:
-        translateY(-12px);
-
+        translate:0 -12px;
     }
 
 }
 
-/* reflejo */
+/* VIDRIO */
 
 .reflection{
 
     position:absolute;
 
-    width:130px;
-    height:250px;
+    width:120px;
+    height:240px;
 
     border-radius:50%;
 
@@ -291,8 +296,8 @@ body{
     rgba(255,255,255,.6),
     transparent);
 
-    top:18px;
-    left:35px;
+    top:15px;
+    left:30px;
 
     transform:rotate(-18deg);
 }
@@ -304,7 +309,7 @@ body{
     position:absolute;
 
     width:100%;
-    height:130px;
+    height:120px;
 
     bottom:0;
 
@@ -339,7 +344,7 @@ body{
     );
 }
 
-/* flores */
+/* FLORES */
 
 .flower{
 
@@ -403,12 +408,10 @@ body{
     transform-style:preserve-3d;
 }
 
-/* FOTO */
-
 .photo{
 
-    width:200px;
-    height:200px;
+    width:165px;
+    height:165px;
 
     border-radius:50%;
 
@@ -447,10 +450,10 @@ body{
 
     position:absolute;
 
-    width:300px;
-    height:105px;
+    width:220px;
+    height:85px;
 
-    bottom:-72px;
+    bottom:-52px;
 
     left:50%;
 
@@ -476,14 +479,14 @@ body{
     position:absolute;
 
     left:50%;
-    top:33px;
+    top:25px;
 
     transform:
     translateX(-50%);
 
     color:white;
 
-    font-size:26px;
+    font-size:22px;
 
     font-weight:bold;
 
@@ -568,34 +571,6 @@ body{
         scale(2);
 
         opacity:0;
-    }
-
-}
-
-/* responsive */
-
-@media(max-width:480px){
-
-    .scene{
-
-        width:340px;
-        height:340px;
-    }
-
-    .photo{
-
-        width:160px;
-        height:160px;
-    }
-
-    .base{
-
-        width:240px;
-    }
-
-    .love-letter{
-
-        font-size:13px;
     }
 
 }
@@ -760,7 +735,7 @@ function snow(amount=60){
 
 }
 
-/* brillos */
+/* BRILLOS */
 
 function sparks(amount=35){
 
@@ -794,7 +769,7 @@ function sparks(amount=35){
 
 }
 
-/* efecto */
+/* EFECTO */
 
 function shakeEffect(){
 
@@ -832,7 +807,7 @@ function shakeEffect(){
 
 }
 
-/* click */
+/* CLICK */
 
 globe.addEventListener(
 "click",
@@ -842,15 +817,17 @@ globe.addEventListener(
 
 });
 
-/* ROTACION 3D REAL */
+/* ROTACION REAL */
 
 let rotateY = 0;
+
+let velocity = 0;
 
 let isDragging = false;
 
 let startX = 0;
 
-/* mouse */
+/* MOUSE */
 
 globe.addEventListener(
 "mousedown",
@@ -879,30 +856,34 @@ document.addEventListener(
     const moveX =
     e.clientX - startX;
 
-    rotateY +=
-    moveX * 0.4;
+    velocity = moveX * 0.35;
 
-    globe.style.transform =
+    rotateY += velocity;
 
-    `rotateY(${rotateY}deg)`;
-
-    photoContainer.style.transform =
-
-    `translate(-50%,-58%)
-    rotateY(${rotateY}deg)`;
+    updateRotation();
 
     startX = e.clientX;
 
 });
 
-/* touch celular */
+/* TOUCH */
 
 globe.addEventListener(
 "touchstart",
 (e)=>{
 
+    isDragging = true;
+
     startX =
     e.touches[0].clientX;
+
+});
+
+globe.addEventListener(
+"touchend",
+()=>{
+
+    isDragging = false;
 
 });
 
@@ -910,29 +891,64 @@ globe.addEventListener(
 "touchmove",
 (e)=>{
 
+    if(!isDragging) return;
+
     const moveX =
 
     e.touches[0].clientX
     - startX;
 
-    rotateY +=
-    moveX * 0.45;
+    velocity = moveX * 0.45;
 
-    globe.style.transform =
+    rotateY += velocity;
 
-    `rotateY(${rotateY}deg)`;
-
-    photoContainer.style.transform =
-
-    `translate(-50%,-58%)
-    rotateY(${rotateY}deg)`;
+    updateRotation();
 
     startX =
     e.touches[0].clientX;
 
 });
 
-/* celular */
+/* actualizar */
+
+function updateRotation(){
+
+    globe.style.transform =
+
+    `
+    rotateY(${rotateY}deg)
+    `;
+
+    photoContainer.style.transform =
+
+    `
+    translate(-50%,-58%)
+    rotateY(${rotateY}deg)
+    `;
+}
+
+/* inercia */
+
+function animate(){
+
+    if(!isDragging){
+
+        rotateY += velocity;
+
+        velocity *= 0.95;
+
+        updateRotation();
+
+    }
+
+    requestAnimationFrame(
+    animate
+    );
+}
+
+animate();
+
+/* CELULAR */
 
 let lastX,lastY,lastZ;
 
